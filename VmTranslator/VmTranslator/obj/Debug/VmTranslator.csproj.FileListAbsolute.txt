@@ -1,0 +1,13 @@
+C:\Development\nand2tetris\SWProjects\VmTranslator\VmTranslator\VmTranslator\bin\Debug\VmTranslator.exe.config
+C:\Development\nand2tetris\SWProjects\VmTranslator\VmTranslator\VmTranslator\obj\Debug\VmTranslator.csprojResolveAssemblyReference.cache
+C:\Development\nand2tetris\SWProjects\VmTranslator\VmTranslator\VmTranslator\bin\Debug\VmTranslator.exe
+C:\Development\nand2tetris\SWProjects\VmTranslator\VmTranslator\VmTranslator\bin\Debug\VmTranslator.pdb
+C:\Development\nand2tetris\SWProjects\VmTranslator\VmTranslator\VmTranslator\obj\Debug\VmTranslator.exe
+C:\Development\nand2tetris\SWProjects\VmTranslator\VmTranslator\VmTranslator\obj\Debug\VmTranslator.pdb
+C:\Dev\Source\Nand2Tetris\VmTranslator\VmTranslator\obj\Debug\VmTranslator.csprojResolveAssemblyReference.cache
+C:\Dev\Source\Nand2Tetris\VmTranslator\VmTranslator\obj\Debug\VmTranslator.csproj.CoreCompileInputs.cache
+C:\Dev\Source\Nand2Tetris\VmTranslator\VmTranslator\obj\Debug\VmTranslator.exe
+C:\Dev\Source\Nand2Tetris\VmTranslator\VmTranslator\obj\Debug\VmTranslator.pdb
+C:\Dev\Source\Nand2Tetris\VmTranslator\VmTranslator\bin\Debug\VmTranslator.exe.config
+C:\Dev\Source\Nand2Tetris\VmTranslator\VmTranslator\bin\Debug\VmTranslator.exe
+C:\Dev\Source\Nand2Tetris\VmTranslator\VmTranslator\bin\Debug\VmTranslator.pdb

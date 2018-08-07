@@ -11,21 +11,30 @@ namespace VmTranslator
     {
         static void Main(string[] args)
         {
-            if (args.Count() != 2)
+            if (args.Count() < 2)
             {
-                throw new ArgumentException("Must provide two command line arguments");
+                throw new ArgumentException("Must provide at least two command line arguments");
             }
 
-            string inputFileName = args[0];
-            string outputFileName = args[1];
+            var inputFiles = args.Take(args.Length - 1);
+            string outputFileName = args.Last();
+            List<string> assembly = new List<string>();
 
-            string[] commands = File.ReadAllLines(inputFileName);
-
-            var parser = new Parser(commands);
             var writer = new CodeWriter();
-            var translator = new AssemblyWriter(parser, writer);
+            assembly.AddRange(writer.WriteInit());
 
-            File.WriteAllLines(args[1], translator.GetAssembly());
+            foreach (var file in inputFiles)
+            {
+                string[] commands = File.ReadAllLines(file);
+
+                var parser = new Parser(commands);
+                writer.CurrentVmFile = file.Split('\\').Last().Split('.')[0];
+                var translator = new AssemblyWriter(parser, writer);
+
+                assembly.AddRange(translator.GetAssembly());
+            }
+
+            File.WriteAllLines(outputFileName, assembly);
             Console.WriteLine($"Successfully created assembly file {outputFileName}");
             Console.ReadKey();
         }

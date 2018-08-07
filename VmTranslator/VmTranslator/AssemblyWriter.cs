@@ -8,7 +8,7 @@ namespace VmTranslator
 {
     public class AssemblyWriter
     {
-        public AssemblyWriter( Parser parser, CodeWriter codeWriter )
+        public AssemblyWriter(Parser parser, CodeWriter codeWriter)
         {
             _parser = parser;
             _codeWriter = codeWriter;
@@ -37,16 +37,22 @@ namespace VmTranslator
                         commands.AddRange(_codeWriter.WritePushPop(_parser.CommandType, _parser.Arg1(), int.Parse(_parser.Arg2())));
                         break;
                     case CommandType.C_LABEL:
+                        commands.AddRange(_codeWriter.WriteLabel(_parser.Arg1()));
                         break;
                     case CommandType.C_GOTO:
+                        commands.AddRange(_codeWriter.WriteGoto(_parser.Arg1()));
                         break;
                     case CommandType.C_IF:
+                        commands.AddRange(_codeWriter.WriteIf(_parser.Arg1()));
                         break;
                     case CommandType.C_FUNCTION:
+                        commands.AddRange(_codeWriter.WriteFunction(_parser.Arg1(), int.Parse(_parser.Arg2())));
                         break;
                     case CommandType.C_RETURN:
+                        commands.AddRange(_codeWriter.WriteReturn());
                         break;
                     case CommandType.C_CALL:
+                        commands.AddRange(_codeWriter.WriteCall(_parser.Arg1(), int.Parse(_parser.Arg2())));
                         break;
                     default:
                         break;

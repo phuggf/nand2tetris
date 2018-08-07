@@ -40,6 +40,12 @@ namespace VmTranslator
 
         private bool TryParseCommand(string command, out CommandType type)
         {
+            if (string.IsNullOrEmpty(command) || command.Substring(0, 2) == "//")
+            {
+                type = default(CommandType);
+                return false;
+            }
+
             string com = command?.Split(' ')?.FirstOrDefault();
 
             if (string.IsNullOrEmpty(com))
@@ -64,7 +70,7 @@ namespace VmTranslator
         {
             if (CommandType == CommandType.C_ARITHMETIC)
             {
-                return _currentCommand;
+                return new string(_currentCommand.TakeWhile(x => !char.IsWhiteSpace(x)).ToArray());
             }
             else
             {
@@ -74,7 +80,7 @@ namespace VmTranslator
 
         public string Arg2()
         {
-            return _currentCommand.Split(' ')?[2];
+            return _currentCommand.Split()?[2].Trim();
         }
 
         public void Reset()

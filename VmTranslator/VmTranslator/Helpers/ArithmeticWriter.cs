@@ -39,6 +39,16 @@ namespace VmTranslator.Helpers
             }
         }
 
+        public IEnumerable<string> GetCommands(string command, string functionName)
+        {
+            _currentFuncName = functionName;
+            var ret = GetCommands(command);
+            _currentFuncName = null;
+            return ret;
+        }
+
+        private string _currentFuncName = null;
+
         private IEnumerable<string> Add()
         {
             return GetArithmetic("M=D+M");
@@ -88,6 +98,45 @@ namespace VmTranslator.Helpers
 
         private IEnumerable<string> GetCondition(string condition)
         {
+            List<string> ret;
+
+            if (_currentFuncName != null)
+            {
+                ret = GetCondition(condition, _currentFuncName).ToList();
+            }
+            else
+            {
+                ret = new List<string>()
+                {
+                    "@SP",
+                    "AM=M-1",
+                    "D=M",
+                    "A=A-1",
+                    "D=D-M",
+                    $"@T{_addressCounter}",
+                    $"{condition}",
+                    "@SP",
+                    "AM=M-1",
+                    "M=0",
+                    $"@E{_addressCounter}",
+                    "0;JMP",
+                    $"(T{_addressCounter})",
+                    "@SP",
+                    "AM=M-1",
+                    "M=-1",
+                    $"(E{_addressCounter})",
+                    "@SP",
+                    "M=M+1",
+                };
+            }
+
+            _addressCounter++;
+
+            return ret;
+        }
+
+        private IEnumerable<string> GetCondition(string condition, string functionName)
+        {
             var ret = new List<string>()
             {
                 "@SP",
@@ -95,18 +144,18 @@ namespace VmTranslator.Helpers
                 "D=M",
                 "A=A-1",
                 "D=D-M",
-                $"@T{_addressCounter}",
+                $"@{functionName}$T{_addressCounter}",
                 $"{condition}",
                 "@SP",
                 "AM=M-1",
                 "M=0",
-                $"@E{_addressCounter}",
+                $"@{functionName}$E{_addressCounter}",
                 "0;JMP",
-                $"(T{_addressCounter})",
+                $"({functionName}$T{_addressCounter})",
                 "@SP",
                 "AM=M-1",
                 "M=-1",
-                $"(E{_addressCounter})",
+                $"({functionName}$E{_addressCounter})",
                 "@SP",
                 "M=M+1",
             };

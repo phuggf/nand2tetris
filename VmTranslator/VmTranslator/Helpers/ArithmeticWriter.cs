@@ -8,10 +8,6 @@ namespace VmTranslator.Helpers
 {
     public class ArithmeticWriter
     {
-        public ArithmeticWriter()
-        {
-        }
-
         public IEnumerable<string> GetCommands(string command)
         {
             switch (command)
@@ -47,54 +43,27 @@ namespace VmTranslator.Helpers
             return ret;
         }
 
-        private string _currentFuncName = null;
+        private string _currentFuncName;
 
-        private IEnumerable<string> Add()
-        {
-            return GetArithmetic("M=D+M");
-        }
+        private IEnumerable<string> Add() => GetArithmetic("M=D+M");
 
-        private IEnumerable<string> Sub()
-        {
-            return GetArithmetic("M=M-D");
-        }
+        private IEnumerable<string> Sub() => GetArithmetic("M=M-D");
 
-        private IEnumerable<string> Neg()
-        {
-            return new List<string>() { "@SP", "A=M-1", "M=-M" };
-        }
+        private IEnumerable<string> Neg() => new List<string> { "@SP", "A=M-1", "M=-M" };
 
-        private IEnumerable<string> Eq()
-        {
-            return GetCondition("D;JEQ");
-        }
+        private IEnumerable<string> Eq() => GetCondition("D;JEQ");
 
-        private IEnumerable<string> Gt()
-        {
-            return GetCondition("D;JLT");
-        }
+        private IEnumerable<string> Gt() => GetCondition("D;JLT");
 
-        private IEnumerable<string> Lt()
-        {
-            return GetCondition("D;JGT");
-        }
+        private IEnumerable<string> Lt() => GetCondition("D;JGT");
 
-        private IEnumerable<string> And()
-        {
-            return GetArithmetic("M=D&M");
-        }
+        private IEnumerable<string> And() => GetArithmetic("M=D&M");
 
-        private IEnumerable<string> Or()
-        {
-            return GetArithmetic("M=D|M");
-        }
+        private IEnumerable<string> Or() => GetArithmetic("M=D|M");
 
-        private IEnumerable<string> Not()
-        {
-            return new List<string>() { "@SP", "A=M-1", "M=!M" };
-        }
+        private IEnumerable<string> Not() => new List<string> { "@SP", "A=M-1", "M=!M" };
 
-        private int _addressCounter = 0;
+        private int _addressCounter;
 
         private IEnumerable<string> GetCondition(string condition)
         {
@@ -106,7 +75,7 @@ namespace VmTranslator.Helpers
             }
             else
             {
-                ret = new List<string>()
+                ret = new List<string>
                 {
                     "@SP",
                     "AM=M-1",
@@ -137,7 +106,7 @@ namespace VmTranslator.Helpers
 
         private IEnumerable<string> GetCondition(string condition, string functionName)
         {
-            var ret = new List<string>()
+            var ret = new List<string>
             {
                 "@SP",
                 "AM=M-1",
@@ -167,7 +136,7 @@ namespace VmTranslator.Helpers
 
         private IEnumerable<string> GetArithmetic(string operation)
         {
-            return new List<string>()
+            return new List<string>
             {
                 "@SP",
                 "A=M-1",

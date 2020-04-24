@@ -71,6 +71,4 @@ namespace VmTranslatorTests
             Assert.IsFalse(parser.HasMoreCommands);
         }
     }
-
-
 }

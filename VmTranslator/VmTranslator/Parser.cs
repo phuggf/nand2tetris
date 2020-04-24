@@ -42,15 +42,15 @@ namespace VmTranslator
         {
             if (string.IsNullOrEmpty(command) || command.Substring(0, 2) == "//")
             {
-                type = default(CommandType);
+                type = default;
                 return false;
             }
 
-            string com = command?.Split(' ')?.FirstOrDefault();
+            string com = command.Split(' ').FirstOrDefault();
 
             if (string.IsNullOrEmpty(com))
             {
-                type = default(CommandType);
+                type = default;
                 return false;
             }
 
@@ -61,7 +61,7 @@ namespace VmTranslator
             }
             else
             {
-                type = default(CommandType);
+                type = default;
                 return false;
             }
         }

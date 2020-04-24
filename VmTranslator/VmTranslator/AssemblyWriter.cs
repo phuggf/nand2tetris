@@ -20,12 +20,10 @@ namespace VmTranslator
         public string[] GetAssembly()
         {
             var commands = new List<string>();
-            int lineNum = 0;
 
             while (_parser.HasMoreCommands)
             {
                 _parser.Advance();
-                lineNum = commands.Count;
 
                 switch (_parser.CommandType)
                 {
